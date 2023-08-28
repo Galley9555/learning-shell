@@ -7,7 +7,7 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
 
 echo "Install NodeJS"
 yum install nodejs -y &>>${LOG_FILE}
@@ -16,7 +16,7 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
 
 echo "Adding Roboshop Application User"
 useradd roboshop &>>${LOG_FILE}
@@ -25,7 +25,7 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
 
 echo "Downloading Catalogue Application Code"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
@@ -34,7 +34,7 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
 
 cd /home/roboshop
 
@@ -45,7 +45,7 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
 
 mv catalogue-main catalogue
 cd /home/roboshop/catalogue
@@ -57,7 +57,7 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
 
 echo "Setup catalogue Service"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>${LOG_FILE}
@@ -66,7 +66,7 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
 
 
 systemctl daemon-reload &>>${LOG_FILE}
@@ -80,4 +80,4 @@ if [ $? -eq 0 ]; then
 else
   echo Status = Failure
   exit
-  fi
+fi
