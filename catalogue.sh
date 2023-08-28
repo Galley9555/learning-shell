@@ -1,7 +1,7 @@
 LOG_FILE=/tmp/catalogue
 
 ID=$(id -u)
-If [ $ID -ne 0 ]; then
+if [ $ID -ne 0 ]; then
   echo You should run this Script as a Root User or Sudo User
   exit 1
 fi
