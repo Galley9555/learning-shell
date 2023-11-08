@@ -7,12 +7,13 @@ if [ $ID -ne 0 ]; then
 fi
 
 StatusCheck() {
-if [ $1 -eq 0 ]; then
-  echo Status = Success
-else
-  echo Status = Failure
-  exit 1
-fi
+  if [ $1 -eq 0 ]; then
+    echo -e Status = "\e[32mSUCCESS\e[0m"
+  else
+    echo -e Status = "\e[32mSUCCESS\e[0m"
+    exit 1
+  fi
+}
 echo "Setup NodeJS Repos"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
 StatusCheck $?
@@ -27,6 +28,7 @@ if [ $? -ne 0 ]; then
  echo "Adding Roboshop Application User"
  useradd roboshop &>>${LOG_FILE}
  StatusCheck $?
+fi
 
 echo "Downloading Catalogue Application Code"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
