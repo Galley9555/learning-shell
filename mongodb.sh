@@ -1,19 +1,6 @@
 LOG_FILE=/tmp/mongod
 
-ID=$(id -u)
-if [ $ID -ne 0 ]; then
-  echo You should run this Script as a Root User or Sudo User
-  exit 1
-fi
-
-StatusCheck() {
-  if [ $1 -eq 0 ]; then
-    echo -e Status = "\e[32mSUCCESS\e[0m"
-  else
-    echo -e Status = "\e[32mSUCCESS\e[0m"
-    exit 1
-  fi
-}
+source Common.sh
 
 echo "Setting MongoDB Repo"
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$LOG_FILE
