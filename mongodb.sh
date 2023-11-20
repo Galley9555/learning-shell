@@ -1,4 +1,4 @@
-LOG_FILE=/tmp/mongod
+LOG_FILE=/tmp/mongodb
 
 source Common.sh
 
