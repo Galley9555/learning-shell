@@ -41,12 +41,11 @@ StatusCheck $?
 
 echo "Setup catalogue Service"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>${LOG_FILE}
-
-
+StatusCheck $?
 
 systemctl daemon-reload &>>${LOG_FILE}
 systemctl enable catalogue &>>${LOG_FILE}
 
-
 echo "Start Cataloge Service"
 systemctl start catalogue &>>${LOG_FILE}
+StatusCheck $?
