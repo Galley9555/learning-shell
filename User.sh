@@ -41,7 +41,7 @@ npm install &>>${LOG_FILE}
 StatusCheck $?
 
 echo "Update SystemD Service LOG_FILE"
-sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/'
+sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/roboshop/user/systemd.service
 StatusCheck $?
 
 echo "Setup user Service"
