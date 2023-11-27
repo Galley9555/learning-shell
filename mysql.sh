@@ -16,7 +16,7 @@ StatusCheck $?
 
 echo "Start MYSQL Service"
 systemctl enable mysqld &>>$LOG_FILE
-systemctl start mysqld &>>$LOG_FILE
+systemctl restart mysqld &>>$LOG_FILE
 StatusCheck $?
 
 grep temp /var/log/mysqld.log
