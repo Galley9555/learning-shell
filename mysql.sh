@@ -6,7 +6,6 @@ curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/robo
 StatusCheck $?
 
 echo "Disable MySQL Default Module to Enable 5.7 MYSQL"
-
 dnf module disable mysql
 StatusCheck $?
 
@@ -19,7 +18,11 @@ systemctl enable mysqld &>>$LOG_FILE
 systemctl restart mysqld &>>$LOG_FILE
 StatusCheck $?
 
-grep temp /var/log/mysqld.log
+DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+echo "Change Password For 'root'@'localhost'=PASSWORD ('${ROBOSHOP_MYSQL_PASSWORD}');
+FLUSH PRIVILEGES;" >/tmp/root-pass.sql
+echo "Change the default root password"
+mysql --connect-expired-password -uroot -p"$(DEFAULT_PASSWORD)" </tmp/root-pass.sql &>>$LOG_FILE
 
 mysql_secure_installation
 
