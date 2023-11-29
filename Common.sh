@@ -25,7 +25,7 @@ NODEJS() {
 
   id roboshop &>>${LOG_FILE}
   if [ $? -ne 0 ]; then
-   echo "Adding Roboshop Application User"
+   echo "Add Roboshop Application User"
    useradd roboshop &>>${LOG_FILE}
    StatusCheck $?
   fi
@@ -45,14 +45,14 @@ NODEJS() {
   StatusCheck $?
 
 
-  mv user-main ${COMPONENT}
+  mv ${COMPONENT}-main ${COMPONENT}
   cd /home/roboshop/${COMPONENT}
 
   echo "Install NodeJS Dependencies"
   npm install &>>${LOG_FILE}
   StatusCheck $?
 
-  echo "Update SystemD Service LOG_FILE"
+  echo "Update SystemD Service file"
   sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
   StatusCheck $?
 
